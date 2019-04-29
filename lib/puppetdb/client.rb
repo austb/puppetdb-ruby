@@ -37,10 +37,6 @@ module PuppetDB
       @servers = config.server_urls
       pem    = config.pem
       token  = config.token
-      puts config.config
-      puts pem
-      puts token.nil?
-      puts @servers
 
       @servers.each do |server|
         scheme = URI.parse(server).scheme
