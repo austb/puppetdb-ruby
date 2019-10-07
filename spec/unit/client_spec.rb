@@ -376,9 +376,8 @@ describe 'export' do
     file = Tempfile.new 'export_pdb_data.tar.gz'
 
     PuppetDB::Client.expects(:get).returns(mock_response).once.with do |path, opts|
-      path == '/pdb/admin/v1/archive' &&
-        opts[:anonymization_profile] = :none &&
-                                       opts[:stream_body] == true
+      path == '/pdb/admin/v1/archive?anonymization_profile=none' &&
+        opts[:stream_body] == true
     end
     client.export file.path
   end
@@ -390,9 +389,8 @@ describe 'export' do
     file = Tempfile.new 'export_pdb_data.tar.gz'
 
     PuppetDB::Client.expects(:get).returns(mock_response).once.with do |path, opts|
-      path == '/pdb/admin/v1/archive' &&
-        opts[:anonymization_profile] = :full &&
-                                       opts[:stream_body] == true
+      path == '/pdb/admin/v1/archive?anonymization_profile=full' &&
+        opts[:stream_body] == true
     end
     client.export(file.path, anonymization_profile: :full)
   end
